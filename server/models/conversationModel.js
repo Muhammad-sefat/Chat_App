@@ -1,5 +1,29 @@
 const mongoose = require("mongoose");
 
+const messageSchema = new mongoose.Schema(
+  {
+    text: {
+      type: String,
+      default: "",
+    },
+    imageUrl: {
+      type: String,
+      default: "",
+    },
+    videoUrl: {
+      type: String,
+      default: "",
+    },
+    seen: {
+      type: Boolean,
+      default: "",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const conversationSchema = new mongoose.Schema(
   {
     sender: {
@@ -22,5 +46,6 @@ const conversationSchema = new mongoose.Schema(
   }
 );
 
+const messageModel = mongoose.model("message", messageSchema);
 const conversationModel = mongoose.model("conversation", conversationSchema);
-module.exports = conversationModel;
+module.exports = { conversationModel, messageModel };

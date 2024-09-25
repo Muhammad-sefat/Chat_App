@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 3030;
 const connectDB = require("./config/connectDB");
+const router = require("./routes/index");
 
 app.use(
   cors({
@@ -11,6 +12,11 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(express.json());
+
+// api end points
+app.use("/api", router);
 
 app.get("/", (req, res) => {
   res.send(`Server is runing from ${PORT}`);
