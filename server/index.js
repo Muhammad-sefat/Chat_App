@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT || 3030;
+const connectDB = require("./config/connectDB");
 
 app.use(
   cors({
@@ -12,9 +13,11 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.send(`Servrer is runing from ${PORT}`);
+  res.send(`Server is runing from ${PORT}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is runing from ${PORT}`);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is runing from ${PORT}`);
+  });
 });
